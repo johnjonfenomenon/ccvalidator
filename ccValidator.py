@@ -130,7 +130,7 @@ def validate_another():
         return False
 
 #main routine
-print(f'\nWelcome to the card checker app, where you can validate a credit card\n')
+print(f'\nWelcome to the card checker app, where you can validate a Visa, Master Card, or Discover card\n')
 
 while b_validating:
     #retrieve manual input
