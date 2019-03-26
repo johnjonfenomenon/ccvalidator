@@ -6,77 +6,76 @@ import datetime
 b_validating = True
 
 class CreditCard():
-'''
-no input
-creates credit card class()
-'''
+	'''
+	no input
+	creates credit card class()
+	'''
+	def __init__(self,number,exp,cc_code):
+		self.number = number
+		self.exp = exp
+		self.cc_code = cc_code
+		self.cctype = ''
 
-    def __init__(self,number,exp,cc_code):
-        self.number = number
-        self.exp = exp
-        self.cc_code = cc_code
-        self.cctype = ''
-
-    def __str__(self):
-        the_card = ''
-        the_card = f' card type: {self.cctype}  number: {self.number}  exp: {self.exp} cc_code: {self.cc_code}'
-        return the_card
+	def __str__(self):
+		the_card = ''
+		the_card = f'card type: {self.cctype}  \nnumber: {self.number}  \nexp: {self.exp} \ncc_code: {self.cc_code}'
+		return the_card
 
 
-    def checksum(self):
-        '''
-        no input
-        returns a boolean
-        use check sum logic to replace every other digit in 16 digit card with double the value
-        check to see if double the place holder is >=10 so replace by adding the digits together
-        '''    
-        cc_list = [int(i) for i in str(self.number)] #parse the cc entered by user into an individual iterable list
-        digit = 0
+	def checksum(self):
+		'''
+		no input
+		returns a boolean
+		use check sum logic to replace every other digit in 16 digit card with double the value
+		check to see if double the place holder is >=10 so replace by adding the digits together
+		'''    
+		cc_list = [int(i) for i in str(self.number)] #parse the cc entered by user into an individual iterable list
+		digit = 0
 
-        for num in range (0,16,2): 
-            if (cc_list[num]*2) >= 10:
-                d = ((cc_list[num]*2)%10) + 1
-                cc_list[num] = d
-            else:
-                cc_list[num] = cc_list[num]*2
+		for num in range (0,16,2): 
+			if (cc_list[num]*2) >= 10:
+				d = ((cc_list[num]*2)%10) + 1
+				cc_list[num] = d
+			else:
+				cc_list[num] = cc_list[num]*2
 
-        for x in cc_list:  #add all the numbers together and check if mulitple of 10
-            digit = digit + x
+		for x in cc_list:  #add all the numbers together and check if mulitple of 10
+			digit = digit + x
 
-        if digit%10 == 0:
-            return True
-        else:
-            return False
+		if digit%10 == 0:
+			return True
+		else:
+			return False
 
-    def checkdate(self):
-    '''
-    no input
-    Checks if the card is expired
-    '''            
-        if self.exp > datetime.datetime.now():
-            return True
-        else:
-            return False
+	def checkdate(self):
+		'''
+		no input
+		Checks if the card is expired
+		'''            
+		if self.exp > datetime.datetime.now():
+			return True
+		else:
+			return False
 
-    def cc_type(self): 
-    '''
-    no input
-    checks to see what type of credit card and sets the cctype of the object to that credit card type 
-    returns a string
-    '''  
-        num_s = str(self.number)
-        if (int(num_s[:2]) >= 51 and int(num_s[:2]) <= 55 and len(num_s) == 16):
-            self.cctype = 'Master Card'
-            return 'Master Card'
-        elif(int(num_s[0]) == 4 and  len(num_s) == 16):
-            self.cctype = 'Visa'
-            return 'Visa'
-        elif(int(num_s[:4]) == 6011 and len(num_s) == 16):
-            self.cctype = 'Discover'
-            return 'Discover'
-        else:
-            self.cctype = 'card not accepted'
-            return 'card not accepted'
+	def cc_type(self): 
+		'''
+		no input
+		checks to see what type of credit card and sets the cctype of the object to that credit card type 
+		returns a string
+		'''  
+		num_s = str(self.number)
+		if (int(num_s[:2]) >= 51 and int(num_s[:2]) <= 55 and len(num_s) == 16):
+			self.cctype = 'Master Card'
+			return 'Master Card'
+		elif(int(num_s[0]) == 4 and  len(num_s) == 16):
+			self.cctype = 'Visa'
+			return 'Visa'
+		elif(int(num_s[:4]) == 6011 and len(num_s) == 16):
+			self.cctype = 'Discover'
+			return 'Discover'
+		else:
+			self.cctype = 'card not accepted'
+			return 'card not accepted'
 
 #Function list designed to get user input       
 def enter_cc():
@@ -165,7 +164,7 @@ while b_validating:
 
     if (valid_num and valid_exp):
         #pdb.set_trace()
-        (print(f'\nThe following {card_entry} is a valid credit card, please proceed with transaction\n'))
+        (print(f'\nThe following \n{card_entry} \nIs a valid credit card, please proceed with transaction\n'))
     else:
         (print(f'\nWARNING!!!! \nThe following {card_entry} is not a valid credit card, please void transaction\n'))
 
