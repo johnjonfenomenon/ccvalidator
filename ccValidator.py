@@ -96,10 +96,15 @@ def enter_cc():
 
 def enter_exp():
     isValid=False
+    next_month = 0
     while not isValid:
         userIn = input("Expiration date mm/yy: ")
         try: # strptime throws an exception if the input doesn't match the pattern
+             # by default exp_date will be set to first of the month, but cc use can go all the way to the last day of the month
             exp_date = datetime.datetime.strptime(userIn, "%m/%y")
+            next_month = (exp_date.month + 1)%12
+            exp_date = exp_date.replace(month=next_month)
+            exp_date = exp_date-datetime.timedelta(days=1) 
             isValid=True
         except:
             print('Not a valid date!\n')
